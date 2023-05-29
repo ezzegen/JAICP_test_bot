@@ -671,44 +671,6 @@
     },
     "patterns" : [ ],
     "priority" : 0
-  }, {
-    "path" : "/привет",
-    "enabled" : true,
-    "shared" : false,
-    "phrases" : [ {
-      "text" : "Здравствуйте!"
-    }, {
-      "text" : "Привет!"
-    }, {
-      "text" : "привет"
-    }, {
-      "text" : "привет, можешь помочь?"
-    }, {
-      "text" : "добрый день"
-    }, {
-      "text" : "добрый вечер"
-    }, {
-      "text" : "доброе утро"
-    }, {
-      "text" : "с добрым утром"
-    }, {
-      "text" : "ghbdtn"
-    }, {
-      "text" : "хэлло"
-    }, {
-      "text" : "хэллоу"
-    }, {
-      "text" : "салют"
-    }, {
-      "text" : "здрасте"
-    }, {
-      "text" : "приветствую"
-    } ],
-    "classificationRules" : {
-      "refs" : [ ]
-    },
-    "patterns" : [ ],
-    "priority" : 0
   } ],
   "entities" : [ ],
   "enabledSystemEntities" : [ "duckling.number", "duckling.time", "duckling.duration", "duckling.phone-number", "duckling.email", "duckling.url" ],

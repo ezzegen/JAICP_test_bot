@@ -3,13 +3,7 @@
         <q>start</q>
         <state>/Start</state>
     </test-case>
-    
-    <test-case>
-        <q>привет</q>
-        <a state='/Hello'/>
-        <timeoutReply targetState='/Bye' interval='20'/>
-    </test-case>
-    
+
     <test-case>
         <q>пароль</q>
         <a>Здравствуйте!</a>
