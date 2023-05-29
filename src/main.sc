@@ -23,22 +23,28 @@ theme: /
             <b>Пожалуйста, отправьте цифру, соответствующую вашему выбору.</b>
         buttons:
             "В начало" -> /Start
-        script:
-            // При отсутвии ответа бот закрывает сессию.
-            $reactions.timeout({interval: '20s', targetState: '/Bye'});
+        script: $reactions.timeout({interval: '20s', targetState: '/Bye'});
             
         # Обработчик ответов.
         state: ResponseHandler
             q: * (1/1./2/2./карта/приложение) *
-            script: $session.value = $parseTree.text;
+            script:
+                $session.value = $parseTree.text;
+                
             if: $session.value == '1' || $session.value == 'приложение'
                 go!: /ChangeAppPassword
             elseif: $session.value == '2' || $session.value == 'карта'
                 go!: /ChangeCardPassword
+            script:
+                // При отсутвии ответа бот закрывает сессию.
+                $reactions.timeout({interval: '20s', targetState: '/Bye'});
                     
         state: LocalCatchAll
-            q: *
+            event: noMatch
             a: Возможно, вы ошиблись, повторите ввод.
+            buttons:
+                "В начало" -> /Start
+            script: $reactions.timeout({interval: '20s', targetState: '/Bye'});
     
     state: ChangeAppPassword || modal = true
         q: * (*мен*(~пароль/~код/*пин*/*Pin*)*~приложение) *

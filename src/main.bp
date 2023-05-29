@@ -1,0 +1,39 @@
+{
+  "positions" : [ {
+    "id" : "/Start",
+    "x" : 620,
+    "y" : 1010
+  }, {
+    "id" : "/Hello",
+    "x" : 240,
+    "y" : 407
+  }, {
+    "id" : "/Password",
+    "x" : 240,
+    "y" : 1649
+  }, {
+    "id" : "/ChangeAppPassword",
+    "x" : 620,
+    "y" : 1649
+  }, {
+    "id" : "/ChangeCardPassword",
+    "x" : 620,
+    "y" : 2316
+  }, {
+    "id" : "/PoliteEnding",
+    "x" : 1000,
+    "y" : 2316
+  }, {
+    "id" : "/Bye",
+    "x" : 240,
+    "y" : 1010
+  }, {
+    "id" : "/CatchAll",
+    "x" : 240,
+    "y" : 2358
+  }, {
+    "id" : "/Match",
+    "x" : 240,
+    "y" : 2774
+  } ]
+}
