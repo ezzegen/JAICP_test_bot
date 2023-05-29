@@ -5,43 +5,40 @@ theme: /
     state: Start
         q!: *start
     
+    state: Hello
+        intent: /привет
+        random:
+            a: Здравствуйте! Чем могу быть полезен?
+            a: Добрый день! В каком вопросе необходима моя помощь?
+        script:
+            // При отсутвии ответа бот закрывает сессию.
+            $reactions.timeout({interval: '20s', targetState: '/Bye'});
+        
     state: Password
         intent: /пароль
         a: Здравствуйте!
-        go!: Clarification
-        
-        state: Clarification
-            InputText:
-                prompt = Выберите, что именно планируете сделать:
-                    1. Поменять пароль для входа в приложение.
-                    2. Поменять PIN-код от карты.
-                    <b>Пожалуйста, отправьте цифру, соответствующую вашему выбору.</b>
-                varName = value
-                then = /Password/Clarification/ResponseHandler
-                actions = [{
-                    "buttons": [{
-                        "name": "В начало",
-                        "transition": "/Start"
-                        }],
-                        "type": "buttons"
-                        }]
-            script:
-                // При отсутвии ответа бот закрывает сессию. 
-                $reactions.timeout({interval: '20s', targetState: '/Bye'});
-                            
-            # Обработчик ответов.
-            state: ResponseHandler || noContext = true
-                if: $session.value == '1' || $session.value == 'приложение'
-                    go!: /ChangeAppPassword
-                elseif: $session.value == '2' || $session.value == 'карта'
-                    go!: /ChangeCardPassword
-                else: 
-                    go!: /Password/Clarification/LocalCatchAll
-                
-            state: LocalCatchAll
-                a: Возможно, вы ошиблись, повторите ввод.
-                script:
-                    $reactions.timeout({interval: '2s', targetState: '/Password/Clarification'});
+        a: Выберите, что именно планируете сделать:
+            1. Поменять пароль для входа в приложение.
+            2. Поменять PIN-код от карты.
+            <b>Пожалуйста, отправьте цифру, соответствующую вашему выбору.</b>
+        buttons:
+            "В начало" -> /Start
+        script:
+            // При отсутвии ответа бот закрывает сессию.
+            $reactions.timeout({interval: '20s', targetState: '/Bye'});
+            
+        # Обработчик ответов.
+        state: ResponseHandler
+            q: * (1/1./2/2./карта/приложение) *
+            script: $session.value = $parseTree.text;
+            if: $session.value == '1' || $session.value == 'приложение'
+                go!: /ChangeAppPassword
+            elseif: $session.value == '2' || $session.value == 'карта'
+                go!: /ChangeCardPassword
+                    
+        state: LocalCatchAll
+            q: *
+            a: Возможно, вы ошиблись, повторите ввод.
     
     state: ChangeAppPassword || modal = true
         q: * (*мен*(~пароль/~код/*пин*/*Pin*)*~приложение) *

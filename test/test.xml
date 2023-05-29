@@ -1,2 +1,49 @@
 <test>
+    <test-case>
+        <q>start</q>
+        <state>/Start</state>
+    </test-case>
+    
+    <test-case>
+        <q>пароль</q>
+        <a>Здравствуйте!</a>
+        <a state='/Password'/>
+        <timeoutReply targetState='/Bye' interval='20'/>
+    </test-case>
+    
+    <test-case id='Проверка реакций на ответы'>
+        <state>/Password/ResponseHandler
+        <context var='session'>
+          {
+            "value": 1
+          }
+          </context>
+          <q>1</q>
+          <a state='/ChangeAppPassword'/>
+          <q>2</q>
+          <a state='/ChangeCardPassword'/>
+          <q>sdfs</q>
+          <a>Возможно, вы ошиблись, повторите ввод.</a>
+    </state>
+    </test-case>
+        
+    <test-case id='Проверка ответа по прямому запросу'>
+        <q>как поменять пароль в приложении</q>
+        <a class='/ChangeAppPassword'/>
+        <timeoutReply targetState='/ChangeAppPassword/AnotherVariant' interval='2'/>
+    </test-case>
+    
+    <test-case>
+        <state>/ChangeAppPassword/AnotherVariant
+            <a>Либо нажмите на кнопку "Выйти" на странице ввода пароля для входа в приложение.
+                    После чего нужно будет заново пройти регистрацию:
+                    1. Ввести полный номер карты (если оформляли ранее, иначе номер телефона и дату рождения).
+                    2. Указать код из смс-код.
+                    3. Придумать новый пароль для входа.
+            </a>
+            <timeoutReply targetState='/PoliteEnding' interval='2'/>
+        </state>
+        
+    </test-case>
+    
 </test>    
